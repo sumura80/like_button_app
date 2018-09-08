@@ -1,0 +1,33 @@
+
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @post.description %>
+</p>
+
+ 
+<div class="like_button posts-show-item">
+	 <!-- if文を用いて、表示内容を切り替え -->
+      <%if Like.find_by(user_id: @current_user.id, post_id: @post.id)  %>
+	       <%= link_to("/likes/#{@post.id}/destroy",{method: "post"} )do %>
+	        <span class="fa fa-heart like-btn-unlike"></span>
+	       <% end %>
+
+      <% else %>
+
+	      <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
+	        <span class="fa fa-heart like-btn"></span>
+	      <% end %>
+
+      <% end %>
+      <%= @likes_count  %>
+</div>
+
+	
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
